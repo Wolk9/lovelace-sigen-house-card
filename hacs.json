@@ -1,0 +1,10 @@
+{
+  "name": "Sigen House Card",
+  "filename": "sigen-house-card.js",
+  "content_in_root": true,
+  "render_readme": true,
+  "hide_default_branch": true,
+  "country": "NL",
+  "homeassistant": "2023.0.0",
+  "category": "plugin"
+}
