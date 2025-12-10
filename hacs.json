@@ -6,5 +6,7 @@
   "hide_default_branch": true,
   "country": "NL",
   "homeassistant": "2023.0.0",
-  "category": "plugin"
+  "category": "plugin",
+  "zip_release": false,
+  "persistent_directory": "dist"
 }
