@@ -22,19 +22,15 @@ class SigenHouseCard extends LitElement {
       throw new Error("Gebruik minstens 'entities' in de config.");
     }
 
-    // Verwachte structuur:
-    // entities:
-    //   pv: sensor.xxx
-    //   home: sensor.xxx
-    //   battery_power: sensor.xxx
-    //   battery_soc: sensor.xxx
-    //   grid: sensor.xxx
     this._config = {
       title: config.title || "",
       mode_entity: config.mode_entity || null,
       grid_status_entity: config.grid_status_entity || null,
       weather_entity: config.weather_entity || null,
       charger_entity: config.charger_entity || null,
+      house_image:
+        config.house_image ||
+        "/hacsfiles/lovelace-sigen-house-card/sigen-house.svg",
       ...config
     };
   }
@@ -144,7 +140,8 @@ class SigenHouseCard extends LitElement {
         font-size: 16px;
       }
 
-      /* Huis (centrale visual) */
+      /* Huis-achtergrond + overlays */
+
       .house-wrapper {
         position: relative;
         margin-top: 12px;
@@ -153,214 +150,54 @@ class SigenHouseCard extends LitElement {
       .house-scene {
         position: relative;
         width: 100%;
-        padding-bottom: 48%; /* pseudo aspect ratio */
+        padding-bottom: 48%; /* aspect ratio */
         border-radius: 24px;
         overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.45);
       }
 
-      .house-bg {
+      .overlay-layer {
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at 10% 20%, #2b3340, #171b22);
-      }
-
-      .house-body {
-        position: absolute;
-        bottom: 5%;
-        left: 8%;
-        right: 6%;
-        height: 70%;
-        display: flex;
-        align-items: flex-end;
-      }
-
-      .garage {
-        flex: 0 0 26%;
-        height: 60%;
-        background: #141920;
-        border-radius: 10px;
-        box-shadow: 0 14px 18px rgba(0, 0, 0, 0.35);
-        margin-right: 4%;
-        position: relative;
-      }
-
-      .main-house {
-        flex: 1;
-        height: 85%;
-        background: #181f27;
-        border-radius: 12px;
-        box-shadow: 0 18px 24px rgba(0, 0, 0, 0.45);
-        position: relative;
-        display: flex;
-      }
-
-      .house-left {
-        flex: 0.45;
-        border-right: 2px solid #1e2630;
-        position: relative;
-      }
-
-      .house-right {
-        flex: 0.55;
-        position: relative;
-      }
-
-      .roof {
-        position: absolute;
-        left: -5%;
-        right: -5%;
-        bottom: 100%;
-        height: 40%;
-        background: linear-gradient(135deg, #262d37, #171d24);
-        clip-path: polygon(0 100%, 18% 35%, 50% 10%, 82% 35%, 100% 100%);
-        box-shadow: 0 12px 18px rgba(0, 0, 0, 0.45);
-      }
-
-      .pv-panels {
-        position: absolute;
-        bottom: 8%;
-        left: 16%;
-        right: 16%;
-        top: 18%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 3px;
-      }
-
-      .pv-panel {
-        background: linear-gradient(135deg, #293648, #121923);
-        border-radius: 3px;
-        box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.9);
-      }
-
-      .windows {
-        position: absolute;
-        inset: 12% 10% 8% 8%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: 1fr;
-        gap: 3px;
-      }
-
-      .window {
-        background: linear-gradient(135deg, #f8f2d0, #f3cf6e);
-        opacity: 0.8;
-      }
-
-      .battery-stack {
-        position: absolute;
-        bottom: 14%;
-        left: 45%;
-        width: 10%;
-        height: 36%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-      }
-
-      .battery-body {
-        width: 70%;
-        height: 80%;
-        background: #f4f6f8;
-        border-radius: 8px;
-        box-shadow: 0 10px 14px rgba(0, 0, 0, 0.35);
-        position: relative;
-      }
-
-      .battery-dot {
-        position: absolute;
-        top: 14%;
-        right: 18%;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--sigen-accent);
-      }
-
-      .battery-level {
-        position: absolute;
-        bottom: 12%;
-        left: 18%;
-        right: 18%;
-        height: 10%;
-        border-radius: 4px;
-        background: rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      .battery-level-fill {
-        height: 100%;
-        background: var(--sigen-accent);
-        transition: width 0.4s ease-out;
-      }
-
-      .battery-small {
-        position: absolute;
-        bottom: 12%;
-        left: 58%;
-        width: 7%;
-        height: 26%;
-        background: #f4f6f8;
-        border-radius: 6px;
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      .cable {
-        position: absolute;
-        top: 40%;
-        left: 52%;
-        width: 26%;
-        height: 40%;
-        border-radius: 40px;
-        border: 2px solid rgba(140, 217, 213, 0.8);
-        border-color: transparent transparent rgba(140, 217, 213, 0.8) rgba(140, 217, 213, 0.8);
-        transform: translateX(-20%);
-        opacity: 0.9;
-      }
-
-      .ac-charger {
-        position: absolute;
-        left: 10%;
-        bottom: 20%;
-        width: 4%;
-        height: 18%;
-        background: #f4f6f8;
-        border-radius: 8px;
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35);
+        pointer-events: none;
       }
 
       .timeline-line {
         position: absolute;
-        left: 11.5%;
-        top: 14%;
-        bottom: 42%;
         border-left: 1px dashed rgba(255, 255, 255, 0.35);
+      }
+
+      .timeline-line.ac {
+        left: 17%;
+        top: 22%;
+        bottom: 54%;
       }
 
       .timeline-line.pv {
         left: 50%;
-        top: 3%;
-        bottom: 72%;
+        top: 6%;
+        bottom: 68%;
       }
 
       .timeline-line.home {
-        left: 82%;
-        top: 6%;
-        bottom: 70%;
+        left: 77%;
+        top: 12%;
+        bottom: 68%;
       }
 
       .timeline-line.battery {
-        left: 50%;
-        top: 50%;
-        bottom: 17%;
+        left: 51%;
+        top: 48%;
+        bottom: 18%;
       }
 
       .timeline-line.grid {
-        left: 85%;
-        top: 46%;
-        bottom: 8%;
+        left: 80%;
+        top: 48%;
+        bottom: 12%;
       }
 
       .label {
@@ -390,15 +227,16 @@ class SigenHouseCard extends LitElement {
       }
 
       .label.home {
-        top: 12%;
-        right: 7%;
+        top: 13%;
+        right: 6%;
         text-align: right;
       }
 
       .label.ac {
-        top: 22%;
+        top: 24%;
         left: 8%;
         text-align: left;
+        max-width: 30%;
       }
 
       .label.battery {
@@ -501,7 +339,6 @@ class SigenHouseCard extends LitElement {
   }
 
   // Helpers
-
   _getState(entityId) {
     if (!entityId || !this.hass || !this.hass.states[entityId]) return null;
     return this.hass.states[entityId];
@@ -533,18 +370,11 @@ class SigenHouseCard extends LitElement {
     });
   }
 
-  _formatWithComma(value, decimals = 1) {
-    // Gebruik locale om automatisch komma als decimaal te krijgen
-    return this._formatNumber(value, decimals);
-  }
-
   _batteryDots(soc) {
     const dots = 10;
     const filled = Math.round((soc / 100) * dots);
     const arr = [];
-    for (let i = 0; i < dots; i++) {
-      arr.push(i < filled);
-    }
+    for (let i = 0; i < dots; i++) arr.push(i < filled);
     return arr;
   }
 
@@ -557,11 +387,15 @@ class SigenHouseCard extends LitElement {
 
     const cfg = this._config;
 
-    const pvPower = this._num(cfg.entities.pv);
-    const homePower = this._num(cfg.entities.home);
-    const gridPower = this._num(cfg.entities.grid);
-    const batPower = this._num(cfg.entities.battery_power);
-    const batSoc = this._num(cfg.entities.battery_soc);
+    const pvPower = cfg.entities.pv ? this._num(cfg.entities.pv) : null;
+    const homePower = cfg.entities.home ? this._num(cfg.entities.home) : null;
+    const gridPower = cfg.entities.grid ? this._num(cfg.entities.grid) : null;
+    const batPower = cfg.entities.battery_power
+      ? this._num(cfg.entities.battery_power)
+      : null;
+    const batSoc = cfg.entities.battery_soc
+      ? this._num(cfg.entities.battery_soc)
+      : null;
 
     const mode = cfg.mode_entity ? this._text(cfg.mode_entity) : "Normaal";
     const gridStatus = cfg.grid_status_entity
@@ -577,26 +411,43 @@ class SigenHouseCard extends LitElement {
         ? "Ontladen"
         : "Stand-by";
 
-    const pvLabel = `${this._formatWithComma(pvPower)} ${this._unit(
-      cfg.entities.pv,
-      "kW"
-    )}`;
-    const homeLabel = `${this._formatWithComma(homePower)} ${this._unit(
-      cfg.entities.home,
-      "kW"
-    )}`;
-    const gridLabel = `${this._formatWithComma(gridPower)} ${this._unit(
-      cfg.entities.grid,
-      "kW"
-    )}`;
-    const batLabel = `${this._formatWithComma(batPower)} ${this._unit(
-      cfg.entities.battery_power,
-      "kW"
-    )}`;
+    const pvLabel =
+      pvPower !== null && cfg.entities.pv
+        ? `${this._formatNumber(pvPower)} ${this._unit(
+            cfg.entities.pv,
+            "kW"
+          )}`
+        : "--";
+    const homeLabel =
+      homePower !== null && cfg.entities.home
+        ? `${this._formatNumber(homePower)} ${this._unit(
+            cfg.entities.home,
+            "kW"
+          )}`
+        : "--";
+    const gridLabel =
+      gridPower !== null && cfg.entities.grid
+        ? `${this._formatNumber(gridPower)} ${this._unit(
+            cfg.entities.grid,
+            "kW"
+          )}`
+        : "--";
+    const batLabel =
+      batPower !== null && cfg.entities.battery_power
+        ? `${this._formatNumber(batPower)} ${this._unit(
+            cfg.entities.battery_power,
+            "kW"
+          )}`
+        : "--";
     const batSocLabel =
-      batSoc !== null ? `${this._formatNumber(batSoc, 1)}%` : "--";
+      batSoc !== null && cfg.entities.battery_soc
+        ? `${this._formatNumber(batSoc, 1)}%`
+        : "--";
 
-    const batLevelWidth = batSoc !== null ? Math.max(4, Math.min(100, batSoc)) : 0;
+    const batLevelWidth =
+      batSoc !== null && cfg.entities.battery_soc
+        ? Math.max(4, Math.min(100, batSoc))
+        : 0;
 
     const dots = this._batteryDots(batSoc || 0);
 
@@ -627,86 +478,76 @@ class SigenHouseCard extends LitElement {
         </div>
 
         <div class="house-wrapper">
-          <div class="house-scene">
-            <div class="house-bg"></div>
-
-            <div class="timeline-line ac"></div>
-            <div class="timeline-line pv"></div>
-            <div class="timeline-line home"></div>
-            <div class="timeline-line battery"></div>
-            <div class="timeline-line grid"></div>
-
-            <div class="label ac">
-              <div class="value">
-                ${cfg.charger_entity ? this._text(cfg.charger_entity) : "Niet aangesloten"}
-              </div>
-              <div class="caption">AC-LADER</div>
-            </div>
-
-            <div class="label pv">
-              <div class="value">${pvLabel}</div>
-              <div class="caption">ZONNE-ENERGIE</div>
-            </div>
-
-            <div class="label home">
-              <div class="value">${homeLabel}</div>
-              <div class="caption">THUIS</div>
-            </div>
-
-            <div class="label battery">
-              <div class="value">
-                ${batLabel}
-                ${batSoc !== null ? html` • ${batSocLabel}` : ""}
-              </div>
-              <div class="caption">
-                SigenStor
-                <span class="status-ok"> ${batDirection}</span>
-              </div>
-            </div>
-
-            <div class="label grid">
-              <div class="value">${gridLabel}</div>
-              <div class="caption">STROOMNET</div>
-            </div>
-
-            <div class="house-body">
-              <div class="garage">
-                <div class="ac-charger"></div>
-              </div>
-              <div class="main-house">
-                <div class="house-left">
-                  <div class="roof">
-                    <div class="pv-panels">
-                      ${Array.from({ length: 6 }).map(
-                        () => html`<div class="pv-panel"></div>`
-                      )}
+          <div
+            class="house-scene"
+            style="background-image: url('${cfg.house_image}');"
+          >
+            <div class="overlay-layer">
+              <!-- AC-lader -->
+              ${cfg.charger_entity
+                ? html`
+                    <div class="timeline-line ac"></div>
+                    <div class="label ac">
+                      <div class="value">
+                        ${this._text(cfg.charger_entity) || "Niet aangesloten"}
+                      </div>
+                      <div class="caption">AC-LADER</div>
                     </div>
-                  </div>
-                </div>
-                <div class="house-right">
-                  <div class="windows">
-                    ${Array.from({ length: 9 }).map(
-                      () => html`<div class="window"></div>`
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+                  `
+                : ""}
 
-            <div class="battery-stack">
-              <div class="battery-body">
-                <div class="battery-dot"></div>
-                <div class="battery-level">
-                  <div
-                    class="battery-level-fill"
-                    style="width: ${batLevelWidth}%;"
-                  ></div>
-                </div>
-              </div>
-            </div>
+              <!-- PV -->
+              ${cfg.entities.pv
+                ? html`
+                    <div class="timeline-line pv"></div>
+                    <div class="label pv">
+                      <div class="value">${pvLabel}</div>
+                      <div class="caption">ZONNE-ENERGIE</div>
+                    </div>
+                  `
+                : ""}
 
-            <div class="battery-small"></div>
-            <div class="cable"></div>
+              <!-- Thuis -->
+              ${cfg.entities.home
+                ? html`
+                    <div class="timeline-line home"></div>
+                    <div class="label home">
+                      <div class="value">${homeLabel}</div>
+                      <div class="caption">THUIS</div>
+                    </div>
+                  `
+                : ""}
+
+              <!-- Batterij -->
+              ${cfg.entities.battery_power || cfg.entities.battery_soc
+                ? html`
+                    <div class="timeline-line battery"></div>
+                    <div class="label battery">
+                      <div class="value">
+                        ${cfg.entities.battery_power ? batLabel : ""}
+                        ${cfg.entities.battery_soc && batSoc !== null
+                          ? html` • ${batSocLabel}`
+                          : ""}
+                      </div>
+                      <div class="caption">
+                        SigenStor
+                        <span class="status-ok"> ${batDirection}</span>
+                      </div>
+                    </div>
+                  `
+                : ""}
+
+              <!-- Net -->
+              ${cfg.entities.grid
+                ? html`
+                    <div class="timeline-line grid"></div>
+                    <div class="label grid">
+                      <div class="value">${gridLabel}</div>
+                      <div class="caption">STROOMNET</div>
+                    </div>
+                  `
+                : ""}
+            </div>
           </div>
         </div>
 
@@ -722,19 +563,27 @@ class SigenHouseCard extends LitElement {
             </div>
           </div>
 
-          <div class="footer-card">
-            <div class="footer-title">Batterijniveau</div>
-            <div class="footer-main-value">
-              <span>${batSoc !== null ? this._formatNumber(batSoc, 0) : "--"}</span>
-              <span class="footer-main-unit">%</span>
-            </div>
-            <div class="soc-bar">
-              ${dots.map(
-                (active) =>
-                  html`<div class="soc-dot ${active ? "active" : ""}"></div>`
-              )}
-            </div>
-          </div>
+          ${cfg.entities.battery_soc
+            ? html`
+                <div class="footer-card">
+                  <div class="footer-title">Batterijniveau</div>
+                  <div class="footer-main-value">
+                    <span>
+                      ${batSoc !== null ? this._formatNumber(batSoc, 0) : "--"}
+                    </span>
+                    <span class="footer-main-unit">%</span>
+                  </div>
+                  <div class="soc-bar">
+                    ${dots.map(
+                      (active) =>
+                        html`<div class="soc-dot ${active
+                          ? "active"
+                          : ""}"></div>`
+                    )}
+                  </div>
+                </div>
+              `
+            : ""}
         </div>
       </ha-card>
     `;
