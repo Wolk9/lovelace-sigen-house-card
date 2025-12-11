@@ -1,6 +1,6 @@
 {
   "name": "Sigenstor House Monitor Card",
-  "content_in_root": true,
+  "content_in_root": false,
   "filename": "sigen-house-card.js",
   "render_readme": true,
   "resources": [
@@ -9,19 +9,19 @@
       "type": "module"
     },
     {
-      "url": "sigen-house.svg",
+      "url": "assets/sigen-house.svg",
       "type": "image/svg+xml"
     },
     {
-      "url": "sigen-gateway.svg",
+      "url": "assets/sigen-gateway.svg",
       "type": "image/svg+xml"
     },
     {
-      "url": "sigen-ev-charger.svg",
+      "url": "assets/sigen-ev-charger.svg",
       "type": "image/svg+xml"
     },
     {
-      "url": "sigenstor-1-2.svg",
+      "url": "assets/sigenstor-1-2.svg",
       "type": "image/svg+xml"
     }
   ]
