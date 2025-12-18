@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
-   sodipodi:docname="house.svg"
+   sodipodi:docname="sigen-house.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -32,7 +32,7 @@
      inkscape:window-x="0"
      inkscape:window-y="33"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg1" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1">
     <linearGradient
@@ -69,11 +69,10 @@
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath18">
-      <use
-         x="0"
-         y="0"
-         xlink:href="#g17"
-         id="use18" />
+      <g
+         inkscape:label="Clip"
+         id="use18"
+         style="fill:#000000" />
     </clipPath>
     <radialGradient
        inkscape:collect="always"
@@ -196,17 +195,7 @@
          points="586.2599,420.50557 842.09261,357.8697 540.89369,304.45249 296.67818,342.41414 " />
       <g
          id="g18"
-         clip-path="url(#clipPath18)">
-        <g
-           inkscape:label="Clip"
-           id="g17">
-          <path
-             id="path5"
-             style="fill:#adfff8;fill-rule:evenodd;stroke-linejoin:round;fill-opacity:1"
-             d="M 586.2599,809.5323 842.09261,674.62946 V 354.63935 L 723.05971,203.44272 584.64473,417.27522 Z"
-             sodipodi:nodetypes="cccccc" />
-        </g>
-      </g>
+         clip-path="url(#clipPath18)" />
       <g
          id="g39">
         <path
@@ -236,14 +225,18 @@
        id="path14-3"
        sodipodi:nodetypes="ccccc" />
     <g
-       id="g16">
-      <path
-         style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#383838;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
-         d="M 276.19461,347.26223 429.63606,164.74766 v 0 L 568.54095,179.28422 747.82518,205.127 599.22925,457.094"
-         id="path15"
-         sodipodi:nodetypes="cccccc" />
-    </g>
+       id="g16" />
   </g>
+  <path
+     id="path5"
+     style="fill:#b3bdd2;fill-rule:evenodd;stroke-linejoin:round;fill-opacity:1"
+     d="M 586.2599,809.5323 842.09261,674.62946 V 354.63935 L 723.05971,203.44272 584.64473,417.27522 Z"
+     sodipodi:nodetypes="cccccc" />
+  <path
+     style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#383838;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+     d="M 276.19461,347.26223 429.63606,164.74766 v 0 L 568.54095,179.28422 747.82518,205.127 599.22925,457.094"
+     id="path15"
+     sodipodi:nodetypes="cccccc" />
   <path
      style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#808080;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
      d="M 616.99615,473.24574 613.76581,767.20726 817.27763,662.221 814.04728,395.71743 Z"
