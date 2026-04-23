@@ -24,17 +24,9 @@ De card vervangt statische PNG-afbeeldingen door volledig schaalbare, modulaire 
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
-*(Vervang door jouw echte screenshots nadat de card actief is.)*
-
-images/
-├── card-3d-overview.png
-├── card-with-ev.png
-├── card-battery-flow.png
-
-
-![Sigenstor Monitor Card 3D](images/card-3d-overview.png)
+![Sigenstor Monitor Card](huis.png)
 
 ---
 
