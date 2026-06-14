@@ -2,9 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(git log:*)",
-      "Bash(git status:*)",
       "Bash(git diff:*)",
-      "Bash(git tag:*)"
+      "Bash(git status:*)",
+      "Bash(git tag:*)",
+      "Bash(git fetch:*)",
+      "Bash(node --version)",
+      "Bash(python3 -c:*)",
+      "Bash(ls:*)",
+      "Bash(cat CHANGELOG.md)",
+      "Bash(cat manifest.json)",
+      "Bash(cat hacs.json)"
     ]
   },
   "hooks": {
@@ -13,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '🏠 home-assistant-skills plugin loaded. Available skills: /ha-validate /ha-entities /ha-release /ha-review'"
+            "command": "echo '\\n🏠 home-assistant-skills plugin loaded\\nAvailable skills: /ha-validate  /ha-entities  /ha-release  /ha-review\\nRepository: lovelace-sigen-house-card (HACS Lovelace card)\\n'"
           }
         ]
       }
