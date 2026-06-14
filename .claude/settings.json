@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git tag:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🏠 home-assistant-skills plugin loaded. Available skills: /ha-validate /ha-entities /ha-release /ha-review'"
+          }
+        ]
+      }
+    ]
+  }
+}
